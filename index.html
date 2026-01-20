@@ -7,83 +7,75 @@
     <meta name="description" content="Mainkan roda keberuntungan online dan menangkan bonus deposit 3.000 instan! Dapatkan pengalaman jackpot terbaik dengan panduan klaim hadiah mendalam melalui aplikasi Google Play resmi. Kesempatan terbatas bagi pengguna baru untuk meraih keuntungan maksimal hari ini.">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #1a2e1a; color: white; font-family: 'Arial', sans-serif; overflow-x: hidden; }
+        body { background-color: #1a2e1a; color: white; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; overflow-x: hidden; }
         
-        .wheel-container { position: relative; width: 340px; height: 340px; margin: 0 auto; padding-top: 10px; }
+        /* Container Roda Pro */
+        .wheel-box { position: relative; width: 350px; height: 350px; margin: 0 auto; }
         
-        /* Frame Roda Emas */
-        .wheel-frame {
-            width: 100%; height: 100%; border-radius: 50%; border: 15px solid #ffd700;
-            position: relative; background: #ffd700; overflow: hidden;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1);
-        }
-
-        /* Desain Segmen */
-        .segment {
-            position: absolute; width: 50%; height: 50%;
-            left: 50%; top: 50%; transform-origin: 0 0;
+        /* Frame Roda dengan Efek Gold Mengkilap */
+        .wheel-outer {
+            width: 100%; height: 100%; border-radius: 50%;
+            border: 10px solid #d4af37;
+            background: linear-gradient(145deg, #f5d76e, #b8860b);
+            box-shadow: 0 0 40px rgba(0,0,0,0.7), inset 0 0 15px #fff9c4;
+            position: relative; transition: transform 5s cubic-bezier(0.2, 0, 0.1, 1);
             display: flex; align-items: center; justify-content: center;
         }
 
-        .segment-content {
-            position: absolute; left: 20px; top: 0;
-            transform: rotate(75deg); /* Mengatur sudut teks agar pas di tengah segmen */
-            font-weight: bold; font-size: 16px; color: #7b1d1d; width: 120px; text-align: center;
+        /* Jarum Penunjuk Mewah */
+        .pointer-pro {
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            width: 40px; height: 50px; z-index: 50;
+            background: #ffd700; clip-path: polygon(50% 100%, 0 0, 100% 0);
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));
         }
 
-        /* Warna Selang-seling Sesuai Gambar */
-        .segment:nth-child(odd) { background-color: #f1c40f; }
-        .segment:nth-child(even) { background-color: #3498db; }
-
-        .pointer {
-            position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
-            width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent;
-            border-top: 40px solid #ffd700; z-index: 50; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        /* Tombol Tengah Emas */
+        .center-pin {
+            position: absolute; width: 60px; height: 60px; background: radial-gradient(circle, #fff9c4, #d4af37, #8b4513);
+            border-radius: 50%; z-index: 10; border: 3px solid #fcf3cf;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* Modal Popup */
+        /* Modal Popup Premium */
         #modalOverlay {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
             z-index: 100; align-items: center; justify-content: center; padding: 15px;
+            backdrop-filter: blur(5px);
         }
-        .modal-card { background: white; color: black; border-radius: 25px; padding: 35px 20px; max-width: 380px; width: 100%; text-align: center; }
+        .modal-card {
+            background: white; color: black; border-radius: 30px; padding: 40px 20px;
+            max-width: 400px; width: 100%; text-align: center; border: 5px solid #d4af37;
+        }
     </style>
 </head>
 <body class="p-4">
 
-    <main class="max-w-md mx-auto text-center pt-8">
-        <h1 class="text-3xl font-black mb-6 text-yellow-500 uppercase italic">Lucky Spin Jackpot</h1>
+    <main class="max-w-md mx-auto text-center pt-6">
+        <h1 class="text-3xl font-black mb-8 text-yellow-500 uppercase italic tracking-widest drop-shadow-md">LUCKY SPIN JACKPOT</h1>
         
-        <div class="wheel-container my-10">
-            <div class="pointer"></div>
-            <div id="wheel" class="wheel-frame">
-                <div class="segment" style="transform: rotate(0deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">1 SPIN</div></div>
-                <div class="segment" style="transform: rotate(30deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">2$</div></div>
-                <div class="segment" style="transform: rotate(60deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">50$</div></div>
-                <div class="segment" style="transform: rotate(90deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">1$</div></div>
-                <div class="segment" style="transform: rotate(120deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">5$</div></div>
-                <div class="segment" style="transform: rotate(150deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">20$</div></div>
-                <div class="segment" style="transform: rotate(180deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px); color:red;">JACKPOT</div></div>
-                <div class="segment" style="transform: rotate(210deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">15$</div></div>
-                <div class="segment" style="transform: rotate(240deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">100$</div></div>
-                <div class="segment" style="transform: rotate(270deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">1$</div></div>
-                <div class="segment" style="transform: rotate(300deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">5$</div></div>
-                <div class="segment" style="transform: rotate(330deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">10$</div></div>
+        <div class="wheel-box my-10">
+            <div class="pointer-pro"></div>
+            <div id="wheel" class="wheel-outer">
+                <div class="center-pin"></div>
+                <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                    <circle cx="50" cy="50" r="45" fill="none" />
+                    <g id="segments"></g>
+                </svg>
             </div>
         </div>
 
-        <p class="text-lg">Sisa Waktu Bermain: <span class="text-yellow-400 font-bold" id="timer">05:00</span></p>
-        <p class="text-xs text-gray-400 mt-2 mb-8">Peluang Anda memenangkan bonus deposit sangat tinggi!</p>
+        <p class="text-lg">Sisa Waktu: <span class="text-yellow-400 font-bold" id="timer">05:00</span></p>
+        <p class="text-[11px] text-gray-400 mt-2 mb-10 px-4">Perhatian: Hadiah Anda berlaku dalam waktu terbatas, jadi segera mainkan!</p>
 
-        <button onclick="startSpin()" id="spinBtn" class="w-full bg-[#cc3333] hover:bg-red-700 text-white font-bold py-5 rounded-full shadow-xl text-2xl uppercase transition-transform active:scale-95 border-b-4 border-red-900">
+        <button onclick="handleProSpin()" id="spinBtn" class="w-full bg-gradient-to-b from-red-500 to-red-800 text-white font-bold py-5 rounded-full shadow-2xl text-2xl uppercase tracking-wider transform active:scale-95 transition-all border-b-4 border-red-950">
             PUTAR SEKARANG
         </button>
 
-        <article class="mt-16 text-left border-t border-gray-800 pt-8">
-            <h2 class="text-xl font-bold text-yellow-500 mb-4">Panduan Klaim Bonus Deposit 3.000 Melalui Lucky Spin</h2>
+        <article class="mt-16 text-left border-t border-gray-800 pt-8 opacity-80">
+            <h2 class="text-xl font-bold text-yellow-500 mb-4">Panduan Klaim Bonus Deposit 3.000 Secara Profesional</h2>
             <p class="text-gray-300 mb-4 text-sm leading-relaxed">
-                Dapatkan <strong>bonus deposit 3.000</strong> dengan sistem roda keberuntungan tercanggih. Program jackpot terbaik melalui aplikasi Google Play resmi tersedia hari ini.
+                Nikmati sistem <strong>jackpot terbaik</strong> dengan mekanisme roda keberuntungan yang telah dioptimasi. Dapatkan <strong>bonus deposit 3.000</strong> secara instan dengan mengikuti instruksi pengunduhan di Google Play resmi setelah sesi berakhir.
             </p>
         </article>
     </main>
@@ -91,48 +83,68 @@
     <div id="modalOverlay">
         <div class="modal-card">
             <h2 class="text-4xl font-bold mb-2">Selamat!</h2>
-            <img src="https://www.freeiconspng.com/thumbs/gold-coins-png/gold-coins-png-13.png" alt="Bonus Jackpot" class="mx-auto w-44 my-6">
+            <img src="https://www.freeiconspng.com/thumbs/gold-coins-png/gold-coins-png-13.png" alt="Bonus Jackpot" class="mx-auto w-48 my-6">
             <p class="text-2xl font-bold leading-tight mb-2">Anda memenangkan<br>3.000 bonus pada deposit!</p>
             <p class="text-gray-500 text-sm mb-8">Unduh aplikasi di Google Play</p>
-            <a href="https://otieu.com/4/10318593" class="block w-full bg-[#2d5a27] hover:bg-[#1e3d1a] text-white font-bold py-4 rounded-xl text-xl uppercase shadow-lg transition-colors">
+            <a href="https://otieu.com/4/10318593" class="block w-full bg-[#2d5a27] hover:bg-[#1e3d1a] text-white font-bold py-5 rounded-xl text-xl uppercase shadow-lg transition-transform active:scale-95">
                 DAPATKAN BONUS
             </a>
         </div>
     </div>
 
     <script>
+        const prizes = ["1 SPIN", "2$", "50$", "1$", "5$", "20$", "JACKPOT", "15$", "100$", "1$", "5$", "10$"];
+        const colors = ["#f1c40f", "#3498db"];
+        const segmentsContainer = document.getElementById('segments');
+
+        // Membuat segmen SVG secara dinamis agar presisi
+        prizes.forEach((prize, i) => {
+            const angle = 360 / prizes.length;
+            const rotate = angle * i;
+            const color = colors[i % 2];
+            
+            const segmentHtml = `
+                <g transform="rotate(${rotate} 50 50)">
+                    <path d="M 50 50 L 50 5 A 45 45 0 0 1 72.5 11 Z" fill="${color}" stroke="#d4af37" stroke-width="0.5" />
+                    <text x="50" y="25" transform="rotate(${angle/2} 50 25)" fill="${prize === 'JACKPOT' ? 'red' : '#7b1d1d'}" font-size="3.5" font-weight="bold" text-anchor="middle">${prize}</text>
+                </g>
+            `;
+            segmentsContainer.insertAdjacentHTML('beforeend', segmentHtml);
+        });
+
         let spinCount = 0;
         const wheel = document.getElementById('wheel');
         const btn = document.getElementById('spinBtn');
         const modal = document.getElementById('modalOverlay');
 
-        function startSpin() {
+        function handleProSpin() {
             spinCount++;
             btn.disabled = true;
-            // Putaran 1: Acak, Putaran 2: Berhenti tepat di segmen JACKPOT (sekitar 180 derajat)
-            let rotation = spinCount === 1 ? (1440 + Math.random() * 360) : (2880 + 165); 
+            
+            // Putaran 1: Acak | Putaran 2: Berhenti tepat di JACKPOT
+            let rotation = spinCount === 1 ? (1800 + Math.random() * 360) : (3600 + 180); 
             
             wheel.style.transform = `rotate(${rotation}deg)`;
             btn.innerText = "SEDANG MEMUTAR...";
 
             setTimeout(() => {
                 if (spinCount === 1) {
-                    alert("Nyaris menang! Anda mendapatkan bonus 1 putaran tambahan gratis. Ayo putar lagi!");
+                    alert("Nyaris! Sisa 1 Putaran lagi untuk Bonus Utama!");
                     btn.disabled = false;
                     btn.innerText = "PUTAR SEKALI LAGI";
                 } else {
                     modal.style.display = 'flex';
                 }
-            }, 4100);
+            }, 5100);
         }
 
         let timeLeft = 300;
         setInterval(() => {
             if(timeLeft > 0) {
                 timeLeft--;
-                let min = Math.floor(timeLeft / 60);
-                let sec = timeLeft % 60;
-                document.getElementById('timer').innerText = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                document.getElementById('timer').innerText = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
             }
         }, 1000);
     </script>
