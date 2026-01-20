@@ -8,22 +8,44 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { background-color: #1a2e1a; color: white; font-family: 'Arial', sans-serif; overflow-x: hidden; }
-        .wheel-container { position: relative; width: 320px; height: 320px; margin: 0 auto; }
+        
+        /* Kontainer Roda */
+        .wheel-container { position: relative; width: 340px; height: 340px; margin: 0 auto; filter: drop-shadow(0 0 20px rgba(0,0,0,0.5)); }
+        
+        /* Desain Roda dengan Teks Hadiah */
         #wheel {
             width: 100%; height: 100%; border-radius: 50%; border: 12px solid #ffd700;
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            background: conic-gradient(
-                #f1c40f 0deg 30deg, #3498db 30deg 60deg, #f1c40f 60deg 90deg, #3498db 90deg 120deg,
-                #f1c40f 120deg 150deg, #3498db 150deg 180deg, #f1c40f 180deg 210deg, #3498db 210deg 240deg,
-                #f1c40f 240deg 270deg, #3498db 270deg 300deg, #f1c40f 300deg 330deg, #3498db 330deg 360deg
-            );
-            box-shadow: 0 0 40px rgba(0,0,0,0.6);
+            position: relative; overflow: hidden;
+            transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1);
+            background: #ffd700; /* Warna dasar emas */
         }
+
+        /* Membuat potongan segmen roda */
+        .segment {
+            position: absolute; width: 50%; height: 50%;
+            transform-origin: 100% 100%; left: 0; top: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        
+        /* Teks di dalam segmen */
+        .segment span {
+            position: absolute; transform: rotate(75deg) translateY(-80px);
+            font-weight: bold; font-size: 14px; color: #7b1d1d; text-align: center;
+            width: 100px;
+        }
+
+        /* Warna Segmen Selang-seling Biru dan Kuning Muda */
+        .segment:nth-child(odd) { background-color: #f1c40f; }
+        .segment:nth-child(even) { background-color: #3498db; }
+
+        /* Jarum Penunjuk */
         .pointer {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
             width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent;
-            border-top: 35px solid #ffd700; z-index: 10;
+            border-top: 40px solid #ffd700; z-index: 20; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
         }
+
+        /* Modal Popup */
         #modalOverlay {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
             z-index: 100; align-items: center; justify-content: center; padding: 15px;
@@ -41,24 +63,36 @@
         
         <div class="wheel-container my-10">
             <div class="pointer"></div>
-            <div id="wheel"></div>
+            <div id="wheel">
+                <div class="segment" style="transform: rotate(0deg) skewY(-60deg);"><span>1 SPIN</span></div>
+                <div class="segment" style="transform: rotate(30deg) skewY(-60deg);"><span>2$</span></div>
+                <div class="segment" style="transform: rotate(60deg) skewY(-60deg);"><span>50$</span></div>
+                <div class="segment" style="transform: rotate(90deg) skewY(-60deg);"><span>1$</span></div>
+                <div class="segment" style="transform: rotate(120deg) skewY(-60deg);"><span>5$</span></div>
+                <div class="segment" style="transform: rotate(150deg) skewY(-60deg);"><span>20$</span></div>
+                <div class="segment" style="transform: rotate(180deg) skewY(-60deg); font-size: 10px;"><span style="color:red">JACKPOT</span></div>
+                <div class="segment" style="transform: rotate(210deg) skewY(-60deg);"><span>15$</span></div>
+                <div class="segment" style="transform: rotate(240deg) skewY(-60deg);"><span>100$</span></div>
+                <div class="segment" style="transform: rotate(270deg) skewY(-60deg);"><span>1$</span></div>
+                <div class="segment" style="transform: rotate(300deg) skewY(-60deg);"><span>5$</span></div>
+                <div class="segment" style="transform: rotate(330deg) skewY(-60deg);"><span>10$</span></div>
+            </div>
         </div>
 
         <p class="text-lg">Sisa Waktu Bermain: <span class="text-yellow-400 font-bold" id="timer">05:00</span></p>
-        <p class="text-xs text-gray-400 mt-2 mb-8">Peluang Anda memenangkan bonus deposit sangat tinggi!</p>
+        <p class="text-xs text-gray-400 mt-2 mb-8">Hadiah Anda berlaku dalam waktu terbatas!</p>
 
-        <button onclick="startSpin()" id="spinBtn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-5 rounded-full shadow-xl text-2xl uppercase transition-transform active:scale-95">
+        <button onclick="startSpin()" id="spinBtn" class="w-full bg-[#cc3333] hover:bg-red-700 text-white font-bold py-5 rounded-full shadow-xl text-2xl uppercase transition-transform active:scale-95 border-b-4 border-red-900">
             PUTAR SEKARANG
         </button>
 
         <article class="mt-16 text-left border-t border-gray-800 pt-8">
-            <h2 class="text-xl font-bold text-yellow-500 mb-4">Panduan Klaim Bonus Deposit 3.000 Melalui Lucky Spin</h2>
+            <h2 class="text-xl font-bold text-yellow-500 mb-4">Panduan Klaim Bonus Deposit 3.000</h2>
             <p class="text-gray-300 mb-4 text-sm leading-relaxed">
-                Mendapatkan <strong>bonus deposit 3.000</strong> kini jauh lebih mudah dengan fitur roda keberuntungan interaktif kami. Program ini dirancang khusus untuk memberikan pengalaman <strong>jackpot terbaik</strong> bagi pengguna baru yang ingin memaksimalkan saldo mereka sejak hari pertama. Melalui penempatan kata kunci strategis dan sistem yang transparan, kami memastikan setiap partisipan memiliki peluang yang sama untuk menang [cite: 2026-01-08].
+                Dapatkan <strong>bonus deposit 3.000</strong> dengan sistem roda keberuntungan tercanggih tahun 2026. Kami memberikan kesempatan bagi pengguna baru untuk meraih <strong>jackpot terbaik</strong> secara instan melalui platform yang aman dan terpercaya.
             </p>
-            <h3 class="text-white font-semibold mb-2 text-sm">Mengapa Menggunakan Sistem Roda Keberuntungan?</h3>
             <p class="text-gray-400 text-sm mb-4 leading-relaxed">
-                Sistem <strong>roda keberuntungan bonus deposit</strong> kami bekerja secara real-time untuk memvalidasi sesi permainan Anda. Dengan durasi waktu 5 menit yang ketat, keamanan klaim hadiah Anda tetap terjaga dari sistem bot. Pastikan Anda mengikuti instruksi pengunduhan aplikasi di Google Play setelah memenangkan putaran kedua untuk aktivasi bonus yang sah [cite: 2026-01-08].
+                Pastikan Anda mengunduh aplikasi resmi di Google Play setelah memenangkan putaran kedua untuk memvalidasi bonus Anda secara otomatis ke dalam akun.
             </p>
         </article>
     </main>
@@ -67,10 +101,8 @@
         <div class="modal-card">
             <h2 class="text-4xl font-bold mb-2">Selamat!</h2>
             <img src="https://www.freeiconspng.com/thumbs/gold-coins-png/gold-coins-png-13.png" alt="Bonus Jackpot" class="mx-auto w-44 my-6">
-            
             <p class="text-2xl font-bold leading-tight mb-2">Anda memenangkan<br>3.000 bonus pada deposit!</p>
             <p class="text-gray-500 text-sm mb-8">Unduh aplikasi di Google Play</p>
-            
             <a href="https://otieu.com/4/10318593" class="block w-full bg-[#2d5a27] hover:bg-[#1e3d1a] text-white font-bold py-4 rounded-xl text-xl uppercase shadow-lg transition-colors">
                 DAPATKAN BONUS
             </a>
@@ -91,15 +123,15 @@
             spinCount++;
             btn.disabled = true;
             
-            // Putaran 1 acak, Putaran 2 mengarah ke area hadiah (Jackpot)
-            let rotation = spinCount === 1 ? (1440 + Math.random() * 360) : (2880 + 165); 
+            // Putaran 1: Random, Putaran 2: Berhenti tepat di segmen JACKPOT (sekitar 180-210 derajat)
+            let rotation = spinCount === 1 ? (1440 + Math.random() * 360) : (2880 + 195); 
             
             wheel.style.transform = `rotate(${rotation}deg)`;
             btn.innerText = "SEDANG MEMUTAR...";
 
             setTimeout(() => {
                 if (spinCount === 1) {
-                    alert("Nyaris menang! Anda mendapatkan bonus 1 putaran tambahan gratis. Ayo putar lagi!");
+                    alert("Coba lagi! Satu putaran terakhir untuk memenangkan Bonus 3.000!");
                     btn.disabled = false;
                     btn.innerText = "PUTAR SEKALI LAGI";
                 } else {
@@ -108,7 +140,6 @@
             }, 4000);
         }
 
-        // Timer Hitung Mundur 5 Menit
         let timeLeft = 300;
         setInterval(() => {
             if(timeLeft > 0) {
