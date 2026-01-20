@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dp49mzzrt/image/upload/v1768947125/Recording_20260121_023423_1_1_akct4d.jpg">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
-    
     <meta name="description" content="Mainkan roda keberuntungan online dan menangkan bonus deposit 3.000 instan! Dapatkan pengalaman jackpot terbaik dengan panduan klaim hadiah mendalam melalui aplikasi Google Play resmi.">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
@@ -16,11 +15,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        body { background-color: #1a2e1a; color: white; font-family: 'Segoe UI', Roboto, sans-serif; }
-        .canvas-container { position: relative; width: 260px; height: 260px; margin: 0 auto; }
+        body { background-color: #1a2e1a; color: white; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; overflow-x: hidden; }
+        
+        /* Animasi Melayang untuk Logo */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .logo-animated {
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+        }
+
+        /* Ukuran Roda Proporsional */
+        .canvas-container { position: relative; width: 280px; height: 280px; margin: 0 auto; }
         #canvas { background: transparent; transform: rotate(-90deg); width: 100%; height: 100%; }
         
-        /* Frame Emas Presisi */
         .wheel-outer-frame {
             position: absolute; inset: -8px; border: 10px solid #d4af37;
             border-radius: 50%; box-shadow: 0 0 30px rgba(0,0,0,0.9), inset 0 0 15px #ffd700;
@@ -31,97 +42,82 @@
             position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
             width: 30px; height: 40px; background: #ffd700;
             clip-path: polygon(50% 100%, 0 0, 100% 0); z-index: 50;
-            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
         }
 
         #modalOverlay {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
             z-index: 100; align-items: center; justify-content: center; padding: 15px;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
-
-        /* Animasi Logo */
-        .logo-glow { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5)); }
     </style>
 </head>
 <body class="p-4">
 
     <main class="max-w-md mx-auto text-center pt-4">
         
-        <div class="flex justify-center mb-2">
+        <div class="flex justify-center mb-4">
             <img src="https://res.cloudinary.com/dp49mzzrt/image/upload/v1768947125/Recording_20260121_023423_1_1_akct4d.jpg" 
-                 alt="Logo Lucky Spin Jackpot" 
-                 class="h-24 w-auto object-contain logo-glow rounded-full border-2 border-yellow-600">
+                 alt="Logo Lucky Spin" 
+                 class="h-16 w-16 object-cover logo-animated rounded-full border-2 border-yellow-600 shadow-xl">
         </div>
 
-        <h1 class="text-2xl font-black mb-6 text-yellow-500 italic uppercase tracking-widest drop-shadow-lg">
+        <h1 class="text-2xl font-black mb-6 text-yellow-500 italic uppercase tracking-widest drop-shadow-md">
             LUCKY SPIN JACKPOT
         </h1>
         
-        <div class="canvas-container my-6">
+        <div class="canvas-container my-8">
             <div class="pointer"></div>
             <div class="wheel-outer-frame"></div>
             <canvas id="canvas" width="300" height="300"></canvas>
         </div>
 
-        <div class="bg-black/30 py-2 px-4 rounded-full inline-block mb-6 border border-yellow-900/50">
-            <p class="text-sm">Sisa Waktu Bermain: <span class="text-yellow-400 font-bold" id="timer">05:00</span></p>
-        </div>
+        <p class="text-md">Sisa Waktu: <span class="text-yellow-400 font-bold" id="timer">05:00</span></p>
+        <p class="text-[10px] text-gray-400 mt-2 mb-8 px-6 italic">Peluang Anda memenangkan bonus deposit sangat tinggi!</p>
 
-        <button onclick="startProfessionalSpin()" id="spinBtn" class="w-full bg-gradient-to-b from-red-500 via-red-700 to-red-900 text-white font-black py-5 rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.4)] text-2xl uppercase tracking-tighter border-b-4 border-red-950 active:scale-95 transition-all">
-            PUTAR & MENANGKAN!
+        <button onclick="startProfessionalSpin()" id="spinBtn" class="w-full bg-gradient-to-b from-red-600 to-red-900 text-white font-black py-5 rounded-2xl shadow-2xl text-2xl uppercase tracking-tighter border-b-4 border-black active:scale-95 transition-all">
+            PUTAR SEKARANG
         </button>
 
-        <article class="mt-12 text-left border-t border-yellow-900/30 pt-8 pb-10 px-2">
-            <h2 class="text-2xl font-bold text-yellow-500 mb-6 leading-tight">Panduan Eksklusif Klaim Bonus Deposit 3.000 Melalui Jackpot Terpercaya</h2>
+        <article class="mt-16 text-left border-t border-yellow-900/30 pt-8 pb-10">
+            <h2 class="text-2xl font-bold text-yellow-500 mb-6 leading-tight">Panduan Klaim Bonus Deposit 3.000 Melalui Lucky Spin Terpercaya</h2>
             
             <p class="text-gray-300 text-sm leading-relaxed mb-6">
-                Selamat datang di platform <strong>roda keberuntungan bonus deposit</strong> paling inovatif di tahun 2026 [cite: 2026-01-20]. Kami telah merancang sistem ini untuk memberikan transparansi penuh bagi para pemain yang ingin mendapatkan <strong>bonus deposit 3.000</strong> secara cepat dan aman. Mekanisme roda kami menggunakan algoritma presisi tinggi yang memastikan setiap putaran memiliki peluang <strong>jackpot terbaik</strong> yang adil [cite: 2026-01-08].
+                Dapatkan <strong>bonus deposit 3.000</strong> dengan sistem roda keberuntungan tercanggih tahun 2026. Kami memberikan kesempatan bagi setiap pengguna baru untuk meraih <strong>jackpot terbaik</strong> secara instan melalui platform yang telah dioptimasi secara profesional. Nikmati kemudahan klaim hadiah hanya dengan mengikuti putaran keberuntungan kami [cite: 2026-01-08].
             </p>
 
-            <h3 class="text-white font-bold text-lg mb-4 italic">Strategi Memaksimalkan Peluang Menang</h3>
+            <h3 class="text-white font-bold mb-3 italic">Mengapa Memilih Layanan Kami?</h3>
             <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                Untuk meraih kemenangan maksimal, pastikan Anda mengikuti sesi putaran dalam waktu yang telah ditentukan oleh sistem timer. Penempatan kata kunci strategis dalam sistem kami memudahkan proses validasi data Anda. Setelah memenangkan hadiah utama, pastikan untuk segera melakukan klaim melalui aplikasi Google Play resmi agar <strong>bonus deposit 3.000</strong> dapat segera diaktifkan ke dalam akun Anda tanpa potongan [cite: 2026-01-08, 2026-01-09].
+                Dalam upaya memberikan pengalaman terbaik, kami menempatkan kata kunci strategis dan sistem verifikasi otomatis. Setelah memenangkan <strong>bonus deposit 3.000</strong>, Anda cukup mengunduh aplikasi resmi di Google Play untuk mengaktifkan saldo Anda secara otomatis tanpa potongan sepeser pun [cite: 2026-01-08].
             </p>
-
-            <div class="bg-yellow-900/10 p-4 rounded-xl border border-yellow-700/20">
-                <h4 class="text-yellow-500 font-bold mb-2 uppercase text-xs tracking-widest">Penting:</h4>
-                <p class="text-gray-400 text-[11px] leading-relaxed italic">
-                    Bonus ini merupakan penawaran terbatas yang hanya berlaku bagi pengguna baru yang berhasil menyelesaikan tantangan lucky spin hari ini. Segera ambil kesempatan Anda sebelum waktu berakhir! [cite: 2026-01-08].
-                </p>
-            </div>
         </article>
     </main>
 
     <div id="modalOverlay">
-        <div class="bg-white text-black rounded-[40px] p-10 max-w-[380px] w-full text-center border-[6px] border-yellow-500 shadow-2xl scale-up-center">
-            <h2 class="text-4xl font-black mb-2 text-red-700">LUAR BIASA!</h2>
-            <img src="https://res.cloudinary.com/dp49mzzrt/image/upload/v1768947125/Recording_20260121_023423_1_1_akct4d.jpg" class="mx-auto w-32 my-6 rounded-full shadow-lg border-2 border-yellow-500" alt="Bonus Jackpot">
-            <p class="text-2xl font-black leading-tight mb-2">Bonus Deposit 3.000<br>Berhasil Anda Dapatkan!</p>
-            <p class="text-gray-500 text-xs mb-8 font-semibold uppercase tracking-widest">Selesaikan Langkah Terakhir di Google Play</p>
-            <a href="https://otieu.com/4/10318593" class="block w-full bg-[#1a4a15] hover:bg-[#12330e] text-white font-black py-5 rounded-2xl text-xl uppercase shadow-[0_5px_15px_rgba(0,0,0,0.2)] transition-transform active:scale-95">
-                KLAIM SEKARANG
+        <div class="bg-white text-black rounded-[40px] p-10 max-w-[380px] w-full text-center border-[6px] border-yellow-500 shadow-2xl">
+            <h2 class="text-4xl font-black mb-2">SELAMAT!</h2>
+            <img src="https://res.cloudinary.com/dp49mzzrt/image/upload/v1768947125/Recording_20260121_023423_1_1_akct4d.jpg" class="mx-auto w-24 my-6 rounded-full shadow-lg border-2 border-yellow-500" alt="Jackpot">
+            <p class="text-2xl font-black leading-tight mb-2">Bonus Deposit 3.000<br>Menanti Anda!</p>
+            <p class="text-gray-500 text-xs mb-8">Unduh aplikasi resmi untuk klaim</p>
+            <a href="https://otieu.com/4/10318593" class="block w-full bg-[#1a4a15] hover:bg-[#12330e] text-white font-black py-5 rounded-2xl text-xl uppercase shadow-lg transition-transform active:scale-95">
+                AMBIL BONUS
             </a>
         </div>
     </div>
 
-    <footer class="mt-10 bg-[#0d1a0d] py-12 px-6 text-center border-t border-yellow-900/50">
-        <div class="max-w-md mx-auto">
-            <img src="https://res.cloudinary.com/dp49mzzrt/image/upload/v1768947125/Recording_20260121_023423_1_1_akct4d.jpg" class="h-10 w-auto mx-auto mb-6 opacity-50 grayscale hover:grayscale-0 transition-all">
-            <h5 class="text-yellow-600 font-black text-xs uppercase tracking-[0.3em] mb-4">Official Lucky Spin 2026</h5>
-            <p class="text-gray-500 text-[10px] leading-relaxed mb-8 px-4">
-                Platform roda keberuntungan nomor satu dengan sistem keamanan enkripsi terkini. Kami berdedikasi memberikan pengalaman jackpot terbaik dan bonus deposit tercepat bagi seluruh pengguna setia di Indonesia [cite: 2026-01-21].
+    <footer class="mt-10 bg-[#0d1a0d] py-12 text-center border-t border-yellow-900/50">
+        <div class="max-w-md mx-auto px-6">
+            <p class="text-yellow-600 font-black text-xs uppercase tracking-[0.4em] mb-4 italic">Official Jackpot 2026</p>
+            <p class="text-gray-500 text-[10px] leading-relaxed mb-8">
+                Platform roda keberuntungan nomor satu yang menjamin keamanan dan kenyamanan klaim bonus deposit bagi seluruh pengguna setia kami di Indonesia [cite: 2026-01-21].
             </p>
-            <div class="flex justify-center items-center space-x-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                <a href="/" class="hover:text-yellow-500 transition-colors">Beranda</a>
-                <span class="w-1 h-1 bg-yellow-900 rounded-full"></span>
-                <a href="#" class="hover:text-yellow-500 transition-colors">Privasi</a>
-                <span class="w-1 h-1 bg-yellow-900 rounded-full"></span>
-                <a href="#" class="hover:text-yellow-500 transition-colors">Bantuan</a>
+            <div class="flex justify-center space-x-6 text-[10px] font-bold text-gray-400 uppercase">
+                <a href="/" class="hover:text-yellow-500">Beranda</a>
+                <span>|</span>
+                <a href="#" class="hover:text-yellow-500">Kebijakan</a>
+                <span>|</span>
+                <a href="#" class="hover:text-yellow-500">Bantuan</a>
             </div>
-            <p class="text-gray-700 text-[9px] mt-10 tracking-widest uppercase">
-                &copy; 2026 Roda Keberuntungan. All Rights Reserved.
-            </p>
+            <p class="text-gray-700 text-[9px] mt-10 uppercase tracking-widest">&copy; 2026 Roda Keberuntungan. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -138,7 +134,6 @@
             const centerY = canvas.height / 2;
             const radius = 140;
             const sliceAngle = (2 * Math.PI) / prizes.length;
-
             prizes.forEach((prize, i) => {
                 ctx.save();
                 ctx.beginPath();
@@ -149,50 +144,43 @@
                 ctx.strokeStyle = '#d4af37';
                 ctx.lineWidth = 1.5;
                 ctx.stroke();
-
                 ctx.translate(centerX, centerY);
                 ctx.rotate(i * sliceAngle + sliceAngle / 2);
                 ctx.textAlign = "right";
                 ctx.fillStyle = prize === "JACKPOT" ? "red" : "#7b1d1d";
                 ctx.font = "bold 14px Arial";
-                ctx.fillText(prize, radius - 15, 5);
+                ctx.fillText(prize, radius - 15, 6);
                 ctx.restore();
             });
-
             ctx.beginPath();
             ctx.arc(centerX, centerY, 25, 0, 2 * Math.PI);
             ctx.fillStyle = '#d4af37';
             ctx.fill();
             ctx.stroke();
         }
-
         drawWheel();
-
         function startProfessionalSpin() {
             if (isSpinning) return;
             isSpinning = true;
             spinCount++;
             const btn = document.getElementById('spinBtn');
             btn.disabled = true;
-            btn.innerText = "SEDANG BERPUTAR...";
-
+            btn.innerText = "SEDANG MEMUTAR...";
             let stopAngle = spinCount === 1 ? (1800 + Math.random() * 360) : (3600 + (360 - (6 * (360/prizes.length)) - 15));
             canvas.style.transition = "transform 5s cubic-bezier(0.1, 0, 0.1, 1)";
             canvas.style.transform = `rotate(${stopAngle}deg)`;
-
             setTimeout(() => {
                 isSpinning = false;
                 if (spinCount === 1) {
-                    alert("Wah, nyaris sekali! Tenang, Anda mendapatkan 1 putaran gratis terakhir untuk meraih JACKPOT!");
+                    alert("Hampir saja! Anda mendapatkan satu putaran gratis tambahan!");
                     btn.disabled = false;
                     btn.innerText = "PUTAR SEKALI LAGI";
                 } else {
-                    confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                     document.getElementById('modalOverlay').style.display = 'flex';
                 }
             }, 5200);
         }
-
         let time = 300;
         setInterval(() => {
             if(time > 0) {
