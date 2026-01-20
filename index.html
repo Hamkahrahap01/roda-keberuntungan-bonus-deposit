@@ -9,40 +9,37 @@
     <style>
         body { background-color: #1a2e1a; color: white; font-family: 'Arial', sans-serif; overflow-x: hidden; }
         
-        /* Kontainer Roda */
-        .wheel-container { position: relative; width: 340px; height: 340px; margin: 0 auto; filter: drop-shadow(0 0 20px rgba(0,0,0,0.5)); }
+        .wheel-container { position: relative; width: 340px; height: 340px; margin: 0 auto; padding-top: 10px; }
         
-        /* Desain Roda dengan Teks Hadiah */
-        #wheel {
-            width: 100%; height: 100%; border-radius: 50%; border: 12px solid #ffd700;
-            position: relative; overflow: hidden;
+        /* Frame Roda Emas */
+        .wheel-frame {
+            width: 100%; height: 100%; border-radius: 50%; border: 15px solid #ffd700;
+            position: relative; background: #ffd700; overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
             transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1);
-            background: #ffd700; /* Warna dasar emas */
         }
 
-        /* Membuat potongan segmen roda */
+        /* Desain Segmen */
         .segment {
             position: absolute; width: 50%; height: 50%;
-            transform-origin: 100% 100%; left: 0; top: 0;
+            left: 50%; top: 50%; transform-origin: 0 0;
             display: flex; align-items: center; justify-content: center;
         }
-        
-        /* Teks di dalam segmen */
-        .segment span {
-            position: absolute; transform: rotate(75deg) translateY(-80px);
-            font-weight: bold; font-size: 14px; color: #7b1d1d; text-align: center;
-            width: 100px;
+
+        .segment-content {
+            position: absolute; left: 20px; top: 0;
+            transform: rotate(75deg); /* Mengatur sudut teks agar pas di tengah segmen */
+            font-weight: bold; font-size: 16px; color: #7b1d1d; width: 120px; text-align: center;
         }
 
-        /* Warna Segmen Selang-seling Biru dan Kuning Muda */
+        /* Warna Selang-seling Sesuai Gambar */
         .segment:nth-child(odd) { background-color: #f1c40f; }
         .segment:nth-child(even) { background-color: #3498db; }
 
-        /* Jarum Penunjuk */
         .pointer {
-            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
             width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent;
-            border-top: 40px solid #ffd700; z-index: 20; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+            border-top: 40px solid #ffd700; z-index: 50; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
         }
 
         /* Modal Popup */
@@ -50,10 +47,7 @@
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
             z-index: 100; align-items: center; justify-content: center; padding: 15px;
         }
-        .modal-card {
-            background: white; color: black; border-radius: 25px; padding: 35px 20px;
-            max-width: 380px; width: 100%; text-align: center;
-        }
+        .modal-card { background: white; color: black; border-radius: 25px; padding: 35px 20px; max-width: 380px; width: 100%; text-align: center; }
     </style>
 </head>
 <body class="p-4">
@@ -63,36 +57,33 @@
         
         <div class="wheel-container my-10">
             <div class="pointer"></div>
-            <div id="wheel">
-                <div class="segment" style="transform: rotate(0deg) skewY(-60deg);"><span>1 SPIN</span></div>
-                <div class="segment" style="transform: rotate(30deg) skewY(-60deg);"><span>2$</span></div>
-                <div class="segment" style="transform: rotate(60deg) skewY(-60deg);"><span>50$</span></div>
-                <div class="segment" style="transform: rotate(90deg) skewY(-60deg);"><span>1$</span></div>
-                <div class="segment" style="transform: rotate(120deg) skewY(-60deg);"><span>5$</span></div>
-                <div class="segment" style="transform: rotate(150deg) skewY(-60deg);"><span>20$</span></div>
-                <div class="segment" style="transform: rotate(180deg) skewY(-60deg); font-size: 10px;"><span style="color:red">JACKPOT</span></div>
-                <div class="segment" style="transform: rotate(210deg) skewY(-60deg);"><span>15$</span></div>
-                <div class="segment" style="transform: rotate(240deg) skewY(-60deg);"><span>100$</span></div>
-                <div class="segment" style="transform: rotate(270deg) skewY(-60deg);"><span>1$</span></div>
-                <div class="segment" style="transform: rotate(300deg) skewY(-60deg);"><span>5$</span></div>
-                <div class="segment" style="transform: rotate(330deg) skewY(-60deg);"><span>10$</span></div>
+            <div id="wheel" class="wheel-frame">
+                <div class="segment" style="transform: rotate(0deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">1 SPIN</div></div>
+                <div class="segment" style="transform: rotate(30deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">2$</div></div>
+                <div class="segment" style="transform: rotate(60deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">50$</div></div>
+                <div class="segment" style="transform: rotate(90deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">1$</div></div>
+                <div class="segment" style="transform: rotate(120deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">5$</div></div>
+                <div class="segment" style="transform: rotate(150deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">20$</div></div>
+                <div class="segment" style="transform: rotate(180deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px); color:red;">JACKPOT</div></div>
+                <div class="segment" style="transform: rotate(210deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">15$</div></div>
+                <div class="segment" style="transform: rotate(240deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">100$</div></div>
+                <div class="segment" style="transform: rotate(270deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">1$</div></div>
+                <div class="segment" style="transform: rotate(300deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">5$</div></div>
+                <div class="segment" style="transform: rotate(330deg) skewY(60deg);"><div class="segment-content" style="transform: skewY(-60deg) rotate(15deg) translateY(-80px);">10$</div></div>
             </div>
         </div>
 
         <p class="text-lg">Sisa Waktu Bermain: <span class="text-yellow-400 font-bold" id="timer">05:00</span></p>
-        <p class="text-xs text-gray-400 mt-2 mb-8">Hadiah Anda berlaku dalam waktu terbatas!</p>
+        <p class="text-xs text-gray-400 mt-2 mb-8">Peluang Anda memenangkan bonus deposit sangat tinggi!</p>
 
         <button onclick="startSpin()" id="spinBtn" class="w-full bg-[#cc3333] hover:bg-red-700 text-white font-bold py-5 rounded-full shadow-xl text-2xl uppercase transition-transform active:scale-95 border-b-4 border-red-900">
             PUTAR SEKARANG
         </button>
 
         <article class="mt-16 text-left border-t border-gray-800 pt-8">
-            <h2 class="text-xl font-bold text-yellow-500 mb-4">Panduan Klaim Bonus Deposit 3.000</h2>
+            <h2 class="text-xl font-bold text-yellow-500 mb-4">Panduan Klaim Bonus Deposit 3.000 Melalui Lucky Spin</h2>
             <p class="text-gray-300 mb-4 text-sm leading-relaxed">
-                Dapatkan <strong>bonus deposit 3.000</strong> dengan sistem roda keberuntungan tercanggih tahun 2026. Kami memberikan kesempatan bagi pengguna baru untuk meraih <strong>jackpot terbaik</strong> secara instan melalui platform yang aman dan terpercaya.
-            </p>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">
-                Pastikan Anda mengunduh aplikasi resmi di Google Play setelah memenangkan putaran kedua untuk memvalidasi bonus Anda secara otomatis ke dalam akun.
+                Dapatkan <strong>bonus deposit 3.000</strong> dengan sistem roda keberuntungan tercanggih. Program jackpot terbaik melalui aplikasi Google Play resmi tersedia hari ini.
             </p>
         </article>
     </main>
@@ -109,10 +100,6 @@
         </div>
     </div>
 
-    <footer class="mt-20 text-center text-gray-600 text-[10px] pb-10">
-        <p>&copy; 2026 Roda Keberuntungan Bonus Deposit. Hak Cipta Dilindungi.</p>
-    </footer>
-
     <script>
         let spinCount = 0;
         const wheel = document.getElementById('wheel');
@@ -122,22 +109,21 @@
         function startSpin() {
             spinCount++;
             btn.disabled = true;
-            
-            // Putaran 1: Random, Putaran 2: Berhenti tepat di segmen JACKPOT (sekitar 180-210 derajat)
-            let rotation = spinCount === 1 ? (1440 + Math.random() * 360) : (2880 + 195); 
+            // Putaran 1: Acak, Putaran 2: Berhenti tepat di segmen JACKPOT (sekitar 180 derajat)
+            let rotation = spinCount === 1 ? (1440 + Math.random() * 360) : (2880 + 165); 
             
             wheel.style.transform = `rotate(${rotation}deg)`;
             btn.innerText = "SEDANG MEMUTAR...";
 
             setTimeout(() => {
                 if (spinCount === 1) {
-                    alert("Coba lagi! Satu putaran terakhir untuk memenangkan Bonus 3.000!");
+                    alert("Nyaris menang! Anda mendapatkan bonus 1 putaran tambahan gratis. Ayo putar lagi!");
                     btn.disabled = false;
                     btn.innerText = "PUTAR SEKALI LAGI";
                 } else {
                     modal.style.display = 'flex';
                 }
-            }, 4000);
+            }, 4100);
         }
 
         let timeLeft = 300;
