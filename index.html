@@ -112,14 +112,58 @@
             <div class="text-[9px] text-slate-700 font-mono tracking-widest">&copy; 2026 OFFICIAL REWARD SYSTEM. ALL RIGHTS RESERVED.</div>
         </div>
     </footer>
+<div class="max-w-md mx-auto px-6">
+        <div class="glass-card overflow-hidden border-yellow-500/20 mb-8">
+            <div class="bg-yellow-500/10 px-4 py-2 border-b border-yellow-500/20 flex justify-between items-center">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-yellow-500">Live Klaim Berhasil</span>
+                <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            </div>
+            <div class="h-[120px] overflow-hidden relative">
+                <div class="absolute w-full transition-all duration-1000" id="live-feed"></div>
+            </div>
+        </div>
 
+        <div class="pt-6 border-t border-slate-800 mb-20">
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 text-left">Baca Juga:</p>
+            <a href="https://hamkahrahap01.github.io/roda-keberuntungan-bonus-deposit/" class="block glass-card p-4 hover:border-yellow-500/50 transition-colors text-left">
+                <h3 class="text-sm font-bold text-white leading-snug">Panduan Lengkap Verifikasi Saldo Jackpot 2026 & Keamanan Enkripsi Google Play</h3>
+            </a>
+        </div>
+    </div>
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const prizes = ["1 SPIN", "2$", "50$", "1$", "5$", "20$", "JACKPOT", "15$", "100$", "1$", "5$", "10$"];
         const colors = ["#1e293b", "#334155"]; 
         let spinCount = 0; let isSpinning = false; let currentRotation = 0;
+// Logika Live Feed Pemenang Otomatis [cite: 2026-01-21]
+const feedData = [
+    { user: "User_88**", reward: "3.000 Bonus", time: "Baru saja" },
+    { user: "Andi_J**", reward: "Jackpot 50$", time: "1 menit lalu" },
+    { user: "Rian_S**", reward: "3.000 Bonus", time: "3 menit lalu" },
+    { user: "Lucky_V**", reward: "Jackpot 100$", time: "5 menit lalu" }
+];
 
+function updateFeed() {
+    const container = document.getElementById('live-feed');
+    if(container) {
+        container.innerHTML = feedData.map(item => `
+            <div class="flex justify-between items-center px-4 py-3 border-b border-slate-800/50">
+                <div class="text-left">
+                    <p class="text-[11px] font-bold text-white">${item.user}</p>
+                    <p class="text-[9px] text-slate-500">${item.time}</p>
+                </div>
+                <span class="text-[10px] font-extrabold text-green-400 uppercase">${item.reward}</span>
+            </div>
+        `).join('');
+    }
+}
+updateFeed();
+setInterval(() => {
+    const first = feedData.shift();
+    feedData.push(first);
+    updateFeed();
+}, 4000);
         function drawWheel() {
             const centerX = canvas.width / 2; const centerY = canvas.height / 2;
             const radius = 240; const sliceAngle = (2 * Math.PI) / prizes.length;
