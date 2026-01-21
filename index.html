@@ -34,7 +34,7 @@
             border-radius: 24px;
         }
 
-        /* PERBAIKAN: Ukuran Roda Diperkecil menjadi 220px */
+        /* Roda Kecil & Presisi */
         .canvas-container { 
             position: relative; 
             width: 220px; 
@@ -75,7 +75,7 @@
         }
         .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.4); }
 
-        /* PERBAIKAN: Popup Tengah Layar Fixed */
+        /* Popup Tengah Layar Fixed */
         #modalOverlay { 
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%;
@@ -104,7 +104,7 @@
     <main class="max-w-md mx-auto px-6 pb-20">
         <header class="text-center mt-2 mb-8">
             <h1 class="text-3xl font-extrabold tracking-tight mb-2">Peluang Jackpot.</h1>
-            <p class="text-slate-400 text-xs">Dapatkan <strong>Bonus Deposit 3.000</strong> hari ini melalui sistem reward terenkripsi kami [cite: 2026-01-08].</p>
+            <p class="text-slate-400 text-xs">Dapatkan <strong>Bonus Deposit 3.000</strong> hari ini melalui sistem reward terenkripsi kami.</p>
         </header>
 
         <div class="glass-card p-6 mb-8 text-center">
@@ -119,7 +119,7 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
-                <p class="text-[10px] font-medium text-slate-300 uppercase tracking-[0.2em]">Sesi Berakhir: <span id="timer" class="text-white font-bold">05:00</span></p>
+                <p class="text-[10px] font-medium text-slate-300 uppercase tracking-[0.2em]">Sesi Berakhir Dalam: <span id="timer" class="text-white font-bold">05:00</span></p>
             </div>
 
             <button onclick="startSpin()" id="spinBtn" class="btn-premium w-full py-4 rounded-2xl text-md font-bold uppercase tracking-widest shadow-lg">
@@ -138,9 +138,13 @@
             </div>
         </div>
 
-        <article class="prose prose-invert max-w-none opacity-80">
-            <p class="text-slate-400 text-[13px] leading-relaxed mb-4">
-                Program <strong>Bonus Deposit 3.000</strong> ini dirancang dengan standar keamanan Google Play, memastikan proses klaim hadiah berjalan secara otomatis [cite: 2026-01-08, 2026-01-21].
+        <article class="prose prose-invert max-w-none">
+            <h2 class="text-xl font-bold text-white mb-4">Sistem Transparansi Reward 2026</h2>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                Sebagai bagian dari inisiatif loyalitas pengguna, platform kami menghadirkan mekanisme <strong>Jackpot Terbaik</strong> tahun ini. Program <strong>Bonus Deposit 3.000</strong> ini dirancang dengan standar keamanan Google Play, memastikan proses klaim hadiah berjalan secara otomatis dan bebas dari biaya tambahan [cite: 2026-01-08].
+            </p>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                Kepercayaan Anda adalah prioritas kami. Setiap transaksi dan klaim bonus melalui roda keberuntungan ini diawasi oleh sistem enkripsi terbaru untuk menjaga integritas akun dan saldo deposit Anda tetap aman [cite: 2026-01-21].
             </p>
         </article>
     </main>
@@ -153,21 +157,28 @@
             <h2 class="text-2xl font-extrabold mb-2 uppercase">Selamat!</h2>
             <p class="text-slate-600 text-sm mb-8 leading-relaxed">Anda memenangkan <strong>Bonus Deposit 3.000</strong>. Saldo akan ditambahkan otomatis setelah verifikasi.</p>
             <a href="https://otieu.com/4/10318593" class="block w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs">
-                Klaim Sekarang
+                Selesaikan Verifikasi
             </a>
         </div>
     </div>
 
-    <footer class="border-t border-slate-800 bg-[#080e1a] py-12 px-8">
+    <footer class="border-t border-slate-800 bg-[#080e1a] py-16 px-8">
         <div class="max-w-md mx-auto text-center">
-            <nav class="flex justify-center space-x-6 text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-6">
+            <div class="flex justify-center items-center space-x-2 opacity-50 mb-6">
+                <img src="https://res.cloudinary.com/dp49mzzrt/image/upload/v1768947125/Recording_20260121_023423_1_1_akct4d.jpg" class="h-6 w-6 rounded-full grayscale">
+                <span class="font-bold tracking-tighter text-sm uppercase">LUCKYSPIN</span>
+            </div>
+            <nav class="flex justify-center space-x-6 text-[11px] font-semibold text-slate-500 uppercase tracking-widest mb-8">
                 <a href="/" class="hover:text-yellow-500">Beranda</a>
                 <a href="#" class="hover:text-yellow-500">Syarat</a>
                 <a href="#" class="hover:text-yellow-500">Privasi</a>
             </nav>
-            <p class="text-[9px] text-slate-700 font-mono tracking-widest uppercase">
-                &copy; 2026 OFFICIAL REWARD SYSTEM [cite: 2026-01-21]
+            <p class="text-[10px] text-slate-600 leading-relaxed mb-8 px-6">
+                Platform ini menggunakan sistem otentikasi resmi. Semua data pengguna dilindungi sesuai dengan kebijakan privasi internasional. Reward hanya berlaku untuk satu kali klaim per akun terverifikasi [cite: 2026-01-21].
             </p>
+            <div class="text-[9px] text-slate-700 font-mono tracking-widest">
+                &copy; 2026 OFFICIAL REWARD SYSTEM. ALL RIGHTS RESERVED.
+            </div>
         </div>
     </footer>
 
@@ -200,7 +211,7 @@
                 ctx.rotate(angle + sliceAngle / 2);
                 ctx.textAlign = "right";
                 ctx.fillStyle = prize === "JACKPOT" ? "#f1c40f" : "#94a3b8";
-                ctx.font = "bold 22px Inter"; // Ukuran font disesuaikan
+                ctx.font = "bold 22px Inter"; 
                 ctx.fillText(prize, radius - 35, 10);
                 ctx.restore();
             });
