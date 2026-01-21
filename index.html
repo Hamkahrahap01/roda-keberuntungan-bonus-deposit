@@ -20,7 +20,6 @@
             color: #f8fafc; 
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
         .bg-mesh {
@@ -35,11 +34,11 @@
             border-radius: 24px;
         }
 
-        /* FIX: Roda Sejajar & Tengah */
+        /* PERBAIKAN: Ukuran Roda Diperkecil menjadi 220px */
         .canvas-container { 
             position: relative; 
-            width: 280px; 
-            height: 280px; 
+            width: 220px; 
+            height: 220px; 
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -49,19 +48,18 @@
         #canvas { 
             width: 100%; 
             height: 100%; 
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
-            /* Hapus rotasi -90 agar sinkron dengan sistem koordinat gambar baru */
+            filter: drop-shadow(0 15px 40px rgba(0,0,0,0.5));
         }
         
         .wheel-border {
-            position: absolute; inset: -8px; border: 4px solid #f1c40f;
+            position: absolute; inset: -6px; border: 4px solid #f1c40f;
             border-radius: 50%; z-index: 5; pointer-events: none;
-            box-shadow: 0 0 20px rgba(241, 196, 15, 0.2);
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
         }
         
         .pointer-premium {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            width: 24px; height: 36px; background: #f1c40f;
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 30px; background: #f1c40f;
             clip-path: polygon(50% 100%, 0 0, 100% 0); z-index: 50;
         }
 
@@ -77,7 +75,7 @@
         }
         .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.4); }
 
-        /* FIX: Popup Tengah Layar (Fixed Overlay) */
+        /* PERBAIKAN: Popup Tengah Layar Fixed */
         #modalOverlay { 
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%;
@@ -104,79 +102,71 @@
     </nav>
 
     <main class="max-w-md mx-auto px-6 pb-20">
-        <header class="text-center mt-4 mb-10">
-            <h1 class="text-4xl font-extrabold tracking-tight mb-2">Peluang Jackpot.</h1>
-            <p class="text-slate-400 text-sm">Dapatkan <strong>Bonus Deposit 3.000</strong> hari ini melalui sistem reward terenkripsi kami.</p>
+        <header class="text-center mt-2 mb-8">
+            <h1 class="text-3xl font-extrabold tracking-tight mb-2">Peluang Jackpot.</h1>
+            <p class="text-slate-400 text-xs">Dapatkan <strong>Bonus Deposit 3.000</strong> hari ini melalui sistem reward terenkripsi kami [cite: 2026-01-08].</p>
         </header>
 
-        <div class="glass-card p-8 mb-8 text-center">
-            <div class="canvas-container mb-10">
+        <div class="glass-card p-6 mb-8 text-center">
+            <div class="canvas-container mb-8">
                 <div class="pointer-premium"></div>
                 <div class="wheel-border"></div>
                 <canvas id="canvas" width="500" height="500"></canvas>
             </div>
 
-            <div class="flex justify-center items-center space-x-2 mb-8">
-                <span class="relative flex h-3 w-3">
+            <div class="flex justify-center items-center space-x-2 mb-6">
+                <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
-                <p class="text-[11px] font-medium text-slate-300 uppercase tracking-[0.2em]">Sesi Berakhir Dalam: <span id="timer" class="text-white font-bold">05:00</span></p>
+                <p class="text-[10px] font-medium text-slate-300 uppercase tracking-[0.2em]">Sesi Berakhir: <span id="timer" class="text-white font-bold">05:00</span></p>
             </div>
 
-            <button onclick="startSpin()" id="spinBtn" class="btn-premium w-full py-5 rounded-2xl text-lg font-bold uppercase tracking-widest shadow-lg">
+            <button onclick="startSpin()" id="spinBtn" class="btn-premium w-full py-4 rounded-2xl text-md font-bold uppercase tracking-widest shadow-lg">
                 Mulai Putaran
             </button>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 mb-12">
+        <div class="grid grid-cols-2 gap-4 mb-10">
             <div class="glass-card p-4 text-center">
-                <p class="text-slate-500 text-[10px] uppercase font-bold mb-1">Total Pemenang</p>
-                <p class="text-xl font-bold">12.840+</p>
+                <p class="text-slate-500 text-[9px] uppercase font-bold mb-1">Total Pemenang</p>
+                <p class="text-lg font-bold">12.840+</p>
             </div>
             <div class="glass-card p-4 text-center">
-                <p class="text-slate-500 text-[10px] uppercase font-bold mb-1">Status Reward</p>
-                <p class="text-xl font-bold text-green-400">AKTIF</p>
+                <p class="text-slate-500 text-[9px] uppercase font-bold mb-1">Status Reward</p>
+                <p class="text-lg font-bold text-green-400">AKTIF</p>
             </div>
         </div>
 
-        <article class="prose prose-invert max-w-none">
-            <h2 class="text-xl font-bold text-white mb-4">Sistem Transparansi Reward 2026</h2>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                Sebagai bagian dari inisiatif loyalitas pengguna, platform kami menghadirkan mekanisme <strong>Jackpot Terbaik</strong> tahun ini. Program <strong>Bonus Deposit 3.000</strong> ini dirancang dengan standar keamanan Google Play, memastikan proses klaim hadiah berjalan secara otomatis dan bebas dari biaya tambahan [cite: 2026-01-08].
-            </p>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                Kepercayaan Anda adalah prioritas kami. Setiap transaksi dan klaim bonus melalui roda keberuntungan ini diawasi oleh sistem enkripsi terbaru untuk menjaga integritas akun dan saldo deposit Anda tetap aman [cite: 2026-01-21].
+        <article class="prose prose-invert max-w-none opacity-80">
+            <p class="text-slate-400 text-[13px] leading-relaxed mb-4">
+                Program <strong>Bonus Deposit 3.000</strong> ini dirancang dengan standar keamanan Google Play, memastikan proses klaim hadiah berjalan secara otomatis [cite: 2026-01-08, 2026-01-21].
             </p>
         </article>
     </main>
 
     <div id="modalOverlay">
-        <div class="bg-white text-slate-900 rounded-[32px] p-10 max-w-[360px] w-full text-center shadow-2xl">
-            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        <div class="bg-white text-slate-900 rounded-[32px] p-10 max-w-[340px] w-full text-center shadow-2xl">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            <h2 class="text-3xl font-extrabold mb-2 uppercase">Selamat!</h2>
+            <h2 class="text-2xl font-extrabold mb-2 uppercase">Selamat!</h2>
             <p class="text-slate-600 text-sm mb-8 leading-relaxed">Anda memenangkan <strong>Bonus Deposit 3.000</strong>. Saldo akan ditambahkan otomatis setelah verifikasi.</p>
-            <a href="https://otieu.com/4/10318593" class="block w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm">
+            <a href="https://otieu.com/4/10318593" class="block w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs">
                 Klaim Sekarang
             </a>
         </div>
     </div>
 
-    <footer class="border-t border-slate-800 bg-[#080e1a] py-16 px-8">
+    <footer class="border-t border-slate-800 bg-[#080e1a] py-12 px-8">
         <div class="max-w-md mx-auto text-center">
-            <div class="flex justify-center items-center space-x-2 opacity-50 mb-6">
-                <img src="https://res.cloudinary.com/dp49mzzrt/image/upload/v1768947125/Recording_20260121_023423_1_1_akct4d.jpg" class="h-6 w-6 rounded-full grayscale">
-                <span class="font-bold tracking-tighter text-sm uppercase">LUCKYSPIN</span>
-            </div>
-            <nav class="flex justify-center space-x-6 text-[11px] font-semibold text-slate-500 uppercase tracking-widest mb-8">
+            <nav class="flex justify-center space-x-6 text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-6">
                 <a href="/" class="hover:text-yellow-500">Beranda</a>
                 <a href="#" class="hover:text-yellow-500">Syarat</a>
                 <a href="#" class="hover:text-yellow-500">Privasi</a>
             </nav>
-            <p class="text-[9px] text-slate-700 font-mono tracking-widest">
-                &copy; 2026 OFFICIAL REWARD SYSTEM. ALL RIGHTS RESERVED. [cite: 2026-01-21]
+            <p class="text-[9px] text-slate-700 font-mono tracking-widest uppercase">
+                &copy; 2026 OFFICIAL REWARD SYSTEM [cite: 2026-01-21]
             </p>
         </div>
     </footer>
@@ -193,11 +183,10 @@
         function drawWheel() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const radius = 230;
+            const radius = 240; 
             const sliceAngle = (2 * Math.PI) / prizes.length;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             prizes.forEach((prize, i) => {
                 const angle = i * sliceAngle;
                 ctx.save();
@@ -211,17 +200,17 @@
                 ctx.rotate(angle + sliceAngle / 2);
                 ctx.textAlign = "right";
                 ctx.fillStyle = prize === "JACKPOT" ? "#f1c40f" : "#94a3b8";
-                ctx.font = "bold 20px Inter";
-                ctx.fillText(prize, radius - 30, 8);
+                ctx.font = "bold 22px Inter"; // Ukuran font disesuaikan
+                ctx.fillText(prize, radius - 35, 10);
                 ctx.restore();
             });
 
             ctx.beginPath();
-            ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI);
+            ctx.arc(centerX, centerY, 35, 0, 2 * Math.PI);
             ctx.fillStyle = '#0f172a';
             ctx.fill();
             ctx.strokeStyle = '#f1c40f';
-            ctx.lineWidth = 4;
+            ctx.lineWidth = 5;
             ctx.stroke();
         }
 
@@ -235,9 +224,7 @@
             btn.disabled = true;
             btn.innerText = "Processing...";
 
-            // FIX: Rotasi Sejajar dengan Jarum Atas
-            // Offset agar jackpot (indeks 6) berhenti tepat di jarum penunjuk atas
-            let baseRotation = 3600; // 10 kali putaran
+            let baseRotation = 3600;
             let stopAngle = spinCount === 1 ? (baseRotation + Math.random() * 360) : (baseRotation + 105); 
             currentRotation += stopAngle;
             
@@ -253,9 +240,7 @@
                         btn.innerText = "Putar Sekali Lagi";
                     } else {
                         confetti({ particleCount: 150, spread: 70, origin: { y: 0.5 } });
-                        // FIX: Tampilkan Popup Tengah
-                        const modal = document.getElementById('modalOverlay');
-                        modal.style.display = 'flex';
+                        document.getElementById('modalOverlay').style.display = 'flex';
                     }
                 }
             });
